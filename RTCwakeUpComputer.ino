@@ -35,9 +35,11 @@ void setup() {
     while (1);
   }
 
-//rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  // Uncomment to set the time on the RTC to the time of the computer (computer time captured during compilation).
+  // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
-  // case: RTC needs time set (e.g. on boot)
+  // Resets the RTC in case of a power loss.
+  // Makes only sense if the RTC fails shortly after set up, otherwise, resetting the RTC is recommended.
   if (rtc.lostPower()) {
     Serial.println("Resetting the RTC time.");
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
@@ -71,6 +73,7 @@ void loop() {
   
   delay(1000*60);
     
+// Useful debugging information  
 //    Serial.print(now.dayOfTheWeek(), DEC);
 //    Serial.print("Current time: ");
 //    Serial.print(now.hour(), DEC);
