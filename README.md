@@ -58,7 +58,7 @@ These components are needed for the build:
 * USB cable to power and program the Arduino
 * (optional) a box to put the circuit in. ~10x5x3cm will be okay.
 
-  ![The final result, built into a computer.](/Pictures/circuit.jpg)
+![The final result, built into a computer.](/Pictures/circuit.png)
 *Figure 1: The final result, built into a computer.*
 
 ![The final result, built into a computer.](/Pictures/frontback.jpg)
