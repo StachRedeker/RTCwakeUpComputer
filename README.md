@@ -25,6 +25,19 @@ RTCwakeUpComputer is no ordinary clock. It features:
 
 ## Working principle
 
+This project is centred around the DS3231. The DS3231 is a Real-Time Clock (RTC) module, meaning that it can keep time accurately. But how do we actually turn on a computer using such a thing? 
+
+If you have ever built (or taken apart) a desktop PC, you might be familiar with the `POWER SWITCH` jumper on the motherboard (also known as one of the 'front panel connectors'). If the two `POWER SWITCH` pins are shorted, the computer turns on (or off). 
+So, I use an Arduino Nano to control a relay. The relay briefly shorts the `POWER SWITCH` pins to turn the system on or off. And that is functionally everything you need to make a hardware-based computer switch.
+
+But wait, there's more. How do we validate that the computer is indeed turned on? We are running this thing in the middle of the night, so 'just' checking in on it is not an option. 
+For that, we abuse another pair of jumpers on the motherboard: the `POWER LED` pins. The `POWER LED` pins are used to control the status LED (if present in your computer case). If the computer is turned on, there will be a voltage on the `POWER LED` pins. If the computer is turned off, there won't be. I use the Arduino to sense if a voltage is present, and hence I'm able to validate if a power on/off request was successful.
+
+Lastly, a question that one might have is: "Why bother with all of this? Why not slam one of those time-controllable outlets between your computer and the power socket? That is cheaper and less of a hassle."
+True, but that also means a 'hard' shutdown. Hard shutdowns can cause all sorts of problems, such as hard-drive write failures. Which is exactly what I do not want happening with a server that is used for backups. Hence, I prefer a 'soft' shutdown. **RTCwakeUpComputer results in the same kind of shutdown as a human operator would cause.**[^HARDSHUTDOWN]
+
+[^HARDSHUTDOWN]: Another disadvantage of just cutting the power is that there is no guarantee that the computer turns on if the power is restored, unless you specifically tell it to in your BIOS.
+
 ## Hardware design
 
 These components are needed for the build:
