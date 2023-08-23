@@ -7,7 +7,7 @@ How lovely would it be if the computer automatically turned on, made the backup,
 > **Note**
 > Modern computer systems can turn themselves on and off with all sorts of fancy tricks, such as Wake-On-Lan (WOL). Those tricks are almost always easier to implement, since they are based on software. Older computers, such as mine, do not have these luxuries.
 
-![The final result, built into a computer.](/final.jpeg)
+![The final result, built into a computer.](/Pictures/finalproduct.jpg)
 *Figure 1: The final result, built into a computer.*
 
 ## Table of contents
@@ -38,6 +38,10 @@ True, but that also means a 'hard' shutdown. Hard shutdowns can cause all sorts 
 
 [^HARDSHUTDOWN]: Another disadvantage of just cutting the power is that there is no guarantee that the computer turns on if the power is restored, unless you specifically tell it to in your BIOS.
 
+![The final result, built into a computer.](/Pictures/connectors.jpg)
+*Figure 1: The final result, built into a computer.*
+
+
 ## Hardware design
 
 These components are needed for the build:
@@ -54,11 +58,27 @@ These components are needed for the build:
 * USB cable to power and program the Arduino
 * (optional) a box to put the circuit in. ~10x5x3cm will be okay.
 
+  ![The final result, built into a computer.](/Pictures/circuit.jpg)
+*Figure 1: The final result, built into a computer.*
+
+![The final result, built into a computer.](/Pictures/frontback.jpg)
+*Figure 1: The final result, built into a computer.*
+
+
+
 ## Software design
 
 
 
 
+
+
+![The final result, built into a computer.](/Pictures/hookedup.jpg)
+*Figure 1: The final result, built into a computer.*
+
+
+![The final result, built into a computer.](/Pictures/off.jpg)
+*Figure 1: The final result, built into a computer.*
 
 
 ## Improvements & limitations
