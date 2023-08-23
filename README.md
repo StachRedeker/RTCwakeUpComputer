@@ -5,7 +5,7 @@ I repurposed an old computer as a Linux FTP server to automatically back up all 
 How lovely would it be if the computer automatically turned on, made the backup, and then turned off again? That's the reason why I invented RTCwakeUpComputer: a fully hardware-based solution to turn your computer on and off at specific times. It can be built within ~2 hours and should cost no more than 15 euros in materials.
 
 > **Note**
-> Modern computer systems can turn themselves on and off with all sorts of fancy tricks, such as Wake-On-Lan (WOL). Those tricks are almost always easier to implement, since they are based on software. Older computers, such as mine, do not have these luxuries.
+> Modern computer systems can turn themselves on and off with all sorts of fancy tricks, such as [Wake-On-Lan (WOL)](https://en.wikipedia.org/wiki/Wake-on-LAN). Those tricks are almost always easier to implement, since they are based on software. Older computers, such as mine, do not have these luxuries.
 
 ![The final result, built into a computer.](/Pictures/finalproduct.jpg)
 *Figure 1: The final result, built into a computer.*
