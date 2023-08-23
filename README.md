@@ -1,5 +1,5 @@
 # RTCwakeUpComputer
-> A hardware-based solution for turning a computer on and off at designated times, centered around the DS3231 RTC.
+> A low-cost, hardware-based solution for turning a computer on and off at designated times, centered around the DS3231 RTC.
 
 I repurposed an old computer as a Linux FTP server to automatically back up all sorts of online projects. Because backups happen once a week during the night, it makes no sense to let the computer run 24/7. 
 How lovely would it be if the computer automatically turned on, made the backup, and then turned off again? That's the reason why I invented RTCwakeUpComputer: a fully hardware-based solution to turn your computer on and off at specific times. It can be built within ~2 hours and should cost no more than 15 euros in materials.
