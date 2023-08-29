@@ -47,8 +47,8 @@ True, but that also means a 'hard' shutdown. Hard shutdowns can cause all sorts 
 
 [^HARDSHUTDOWN]: Another disadvantage of just cutting the power is that there is no guarantee that the computer will turn on if the power is restored, unless you specifically tell it to in your BIOS.
 
-![The final result, built into a computer.](/Pictures/connectors.jpg)
-*Figure 2: The final result, built into a computer.*
+![Front panel connectors in a computer.](/Pictures/connectors.jpg)
+*Figure 2: Front panel connectors in a computer.*
 
 
 ## Hardware design
@@ -75,17 +75,17 @@ I have a DS3231 board that can be accessed via I2C, so I used that protocol.
 
 The last important thing to note about the circuit is that I designed it to work in tandem with the existing computer hardware. I included pin headers to connect the power button from the computer case in parallel to the output of the relay. This way, both the relay and the original power button can be used to turn the computer on and off.
 
-![The final result, built into a computer.](/Pictures/circuit.png)
-*Figure 3: The final result, built into a computer.*
+![Circuit Schematic.](/Pictures/circuit.png)
+*Figure 3: Circuit Schematic.*
 
 I soldered the circuit on a piece of perfboard.
 
-![The final result, built into a computer.](/Pictures/frontback.jpg)
-*Figure 4: The final result, built into a computer.*
+![Soldered realisation on perfboard.](/Pictures/frontback.jpg)
+*Figure 4: Soldered realisation on perfboard.*
 
 ## Software design
 
-The needed code can be found in `RTCwakeUpComputer.ino`. It uses one third-party library (by Adafruit), `RTClib.h`, that I have included as a ZIP file. I'm not a software engineering, so I keep my code simple and complex. 
+The needed code can be found in `RTCwakeUpComputer.ino`. It uses one third-party library (by Adafruit), `RTClib.h`, that I have included as a ZIP file. I'm not a software engineer, so I keep my code simple and functional. 
 
 Once every minute, the Arduino fetches the current time from the RTC:
 
@@ -116,18 +116,23 @@ Wait. What are `switchComputer()` and `validateStatus()`? Those are custom-made 
 
 So, the only thing left is to deploy the system, and wait patiently.
 
-![The final result, built into a computer.](/Pictures/hookedup.jpg)
-*Figure 5: The final result, built into a computer.*
+![The final circuit deployed in a computer case.](/Pictures/hookedup.jpg)
+*Figure 5: The final circuit deployed in a computer case.*
 
 And... it works!
 
-![The final result, built into a computer.](/Pictures/off.jpg)
-*Figure 6: The final result, built into a computer.*
+![It works.](/Pictures/off.jpg)
+*Figure 6: Woohoo!*
 
 
 ## Improvements and limitations
 
+There are two main improvements that can be made:
 
+- [ ] Find out if the system is able to deal with DST, and/or implement a way to cope with it.[^DST]
+- [ ] Shorten the death zone time. That is the time the computer cannot be turned on. See the part in the code that states `else if (now.hour() == 5)`. It exists because it is a lazy way to make sure that the computer turns off after 05:00h.
+
+[^DST]: I cannot think of reasons why this would be of utmost importance. The system will run perfectly fine if you build in a (small) safety margin, of which an example can be seen in code in the software design section.
 
 ## License
 
