@@ -73,7 +73,7 @@ Firstly, a relay that is not 'logic level' cannot be driven from an Arduino. I o
 
 I have a DS3231 board that can be accessed via I2C, so I used that protocol.
 
-The last important thing to note about the circuit
+The last important thing to note about the circuit is that I designed it to work in tandem with the existing computer hardware. I included pin headers to connect the power button from the computer case in parallel to the output of the relay. This way, both the relay and the original power button can be used to turn the computer on and off.
 
 ![The final result, built into a computer.](/Pictures/circuit.png)
 *Figure 3: The final result, built into a computer.*
@@ -83,18 +83,43 @@ I soldered the circuit on a piece of perfboard.
 ![The final result, built into a computer.](/Pictures/frontback.jpg)
 *Figure 4: The final result, built into a computer.*
 
-
-
 ## Software design
 
+The needed code can be found in `RTCwakeUpComputer.ino`. It uses one third-party library (by Adafruit), `RTClib.h`, that I have included as a ZIP file. I'm not a software engineering, so I keep my code simple and complex. 
 
+Once every minute, the Arduino fetches the current time from the RTC:
 
+```cpp
+DateTime now = rtc.now();
+```
 
+I want the backup to run on Tuesdays at 03:00h. However, I'm now living in UTC+2, but because of daylight saving time, 03:00h might become 02:00h at some point. I have no clue if the library is able to deal with DST, nor do I know if the backup program is. Hence, it is best to build in some safety margin. Let's say that the computer should turn on between 01:00h and 05:00h.
 
+```cpp
+  if (now.dayOfTheWeek() == TUESDAY) {
+    if (now.hour() > 0 && now.hour() < 5) { // computer should be turned on between 01:00h and 05:00h
+      if (validateStatus(false)) { // if the computer is not turned on
+        switchComputer(); // turn on
+        delay(60000); // wait for one minute before trying again
+      }
+    }
+      else if (now.hour() == 5) { // this is the dead zone: the computer can never be turned on between the 05:00h and 06:00h. I can accept this for my application.
+        if (validateStatus(true)) { // if the computer is on
+          switchComputer(); // turn off
+          delay(180000); // wait for three minutes before trying again
+        }
+      }
+    }
+```
+
+Wait. What are `switchComputer()` and `validateStatus()`? Those are custom-made functions. `switchComputer()` mimics human behaviour to switch the computer on, i.e. hold the power button and release after one second. `validateStatus()` uses the status LED of the computer to validate if the computer indeed turned on or off.
+
+So, the only thing left is to deploy the system, and wait patiently.
 
 ![The final result, built into a computer.](/Pictures/hookedup.jpg)
 *Figure 5: The final result, built into a computer.*
 
+And... it works!
 
 ![The final result, built into a computer.](/Pictures/off.jpg)
 *Figure 6: The final result, built into a computer.*
@@ -108,10 +133,9 @@ I soldered the circuit on a piece of perfboard.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
 ## Acknowledgments
 
-
+This project uses the [`RTClib`](https://github.com/adafruit/RTClib) library by Adafruit to use the DS3231 with an Arduino. [Adafruit's tutorial](https://learn.adafruit.com/ds1307-real-time-clock-breakout-board-kit/overview) proved useful in learning more about RTCs.
 
 ## Footnotes
 <!---
