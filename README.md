@@ -93,7 +93,7 @@ Once every minute, the Arduino fetches the current time from the RTC:
 DateTime now = rtc.now();
 ```
 
-I want the backup to run on Tuesdays at 03:00h. However, I'm now living in UTC+2, but because of daylight saving time, 03:00h might become 02:00h at some point. I have no clue if the library is able to deal with DST, nor do I know if the backup program is. Hence, it is best to build in some safety margin. Let's say that the computer should turn on between 01:00h and 05:00h.
+I want the backup to run on Tuesdays at 03:00h. I'm now living in UTC+2, but because of daylight saving time, 03:00h might become 02:00h at some point. I have no clue if the library is able to deal with DST, nor do I know if the backup program is. Hence, it is best to build in some safety margin. Let's say that the computer should turn on between 01:00h and 05:00h.
 
 ```cpp
   if (now.dayOfTheWeek() == TUESDAY) {
